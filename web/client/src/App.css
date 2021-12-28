@@ -17,7 +17,7 @@ html {
 	background-color: #f5f5f5;
 }
 
-nav {
+/* nav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -40,7 +40,6 @@ nav {
 .li-style {
 	padding-right: 10px;
 	/* color: red; */
-	/* background-color : blue; */
-	/* align-items: center; */
-	/* text-align: center; */
-}
+/* background-color : blue; */
+/* align-items: center; */
+/* text-align: center; }*/
