@@ -37,13 +37,13 @@ run dep-mig-copy.ps1 (it will deploy the contract)
 
 \
 \
-`cd web`
+`cd web/client`
 
 create `.env` file by taking the reference of `.env.sample` file (in the same folder where .env.sample is present)
 
 *if you don't want to modify any file in web folder
 
-`node app.js` (it will copy the new abi and new contract address in public/contract_details.json file)
+`npm start` (it will copy the new abi and new contract address in public/contract_details.json file)
 
 \
 *if you want to modify files in web folder
