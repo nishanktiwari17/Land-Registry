@@ -51,6 +51,7 @@ function User() {
 	const [price, setPrice] = useState('');
 	const [avail, setAvail] = useState(false);
 	const [currentAccount, setCurrentAccount] = useState(null);
+	const aadhar = validator.isValidNumber(dochash);
 	const [error, setError] = useState(false);
 
 	const checkWalletIsConnected = async () => {
@@ -281,6 +282,16 @@ function User() {
 		}
 	};
 
+	const validation = (event) => {
+		const aadhar = validator.isValidNumber(event.target.value);
+		if (aadhar) {
+			setError(false);
+			setdochash(aadhar);
+		} else {
+			setError(true);
+		}
+	};
+
 	useEffect(() => {
 		checkWalletIsConnected();
 		//handleClick();
@@ -356,9 +367,13 @@ function User() {
 											id="outlined-basic"
 											label="Aadhar number"
 											variant="outlined"
-											onChange={(e) => {
-												setdochash(e.target.value);
-											}}
+											onChange={validation}
+											error={error}
+											helperText={
+												error
+													? 'Enter valid Aadhar number'
+													: null
+											}
 										/>
 									</Grid>
 								</Grid>
