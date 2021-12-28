@@ -1,0 +1,1 @@
+ganache-cli --chainId 1338 --networkId 5777 --db "C:\Users\kpati\OneDrive\Desktop\_D\zDBs_and_Storages\Ganache1" --acctKeys "C:\Users\kpati\OneDrive\Desktop\_D\zDBs_and_Storages\Ganache1accounts.json" --account "0x8fea1a67df01bbda5fe0ca5e8bc018d9b29c519e352cf8a61982c469347b0153, 100000000000000000000"
