@@ -27,12 +27,14 @@ function Nav() {
 		style: {
 			barStyles: {
 				background: 'rgb(73, 79, 82)',
+				position: 'fixed',
 			},
 			sidebarStyles: {
-				background: '#222',
+				background: 'rgb(73, 79, 82)',
 				buttonColor: 'white',
 			},
 		},
+		float: true,
 	};
 	return (
 		<div className="home">
