@@ -286,7 +286,7 @@ function User() {
 		const aadhar = validator.isValidNumber(event.target.value);
 		if (aadhar) {
 			setError(false);
-			setdochash(aadhar);
+			setdochash(event.target.value);
 		} else {
 			setError(true);
 		}
