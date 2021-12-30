@@ -34,7 +34,6 @@ function Nav() {
 				buttonColor: 'white',
 			},
 		},
-		float: true,
 	};
 	return (
 		<div className="home">

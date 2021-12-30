@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    address: String,
-    name: String,
-    district: String,
-    docHash: String,
-    isVerified: Boolean,
-    blockNumber: Number
+	address: String,
+	name: String,
+	district: String,
+	docHash: String,
+	isVerified: Boolean,
+	blockNumber: Number,
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

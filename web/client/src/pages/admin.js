@@ -276,6 +276,7 @@ function Admin() {
 									<Button
 										variant="contained"
 										className={classes.buttonGroup}
+										style={{ marginLeft: '6px' }}
 									>
 										Reject
 									</Button>
@@ -373,6 +374,7 @@ function Admin() {
 									<Button
 										variant="contained"
 										className={classes.buttonGroup}
+										style={{ marginLeft: '6px' }}
 									>
 										Reject
 									</Button>
