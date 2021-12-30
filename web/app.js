@@ -2,12 +2,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Web3 = require('web3');
 const fs = require('fs');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(express.static('public'));
 require('dotenv').config(); // loading environment variables
 const port = process.env.PORT;
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 // MongoDB connection
 let mongodbURL =
@@ -28,7 +35,10 @@ mongoose.connection
 
 // MongoDB Schemas
 const User = require('./models/user');
-
+const Chat = mongoose.model('Chat', {
+	text: { type: String },
+	chatId: { type: String },
+});
 // web3 config
 const web3 = new Web3(
 	new Web3.providers.WebsocketProvider(process.env.ETH_NODE_PROVIDER)
@@ -130,6 +140,20 @@ app.get('/api/users/:district', (req, res) => {
 	});
 });
 
-app.listen(port, () => {
+//Socket connections
+const http = require('http').Server(app);
+const io = require('socket.io')(http, {
+	cors: {
+		origin: ['http://localhost:3000'],
+	},
+});
+
+io.on('connect', (socket) => {
+	socket.on('send-message', (message, socketId) => {
+		socket.broadcast.emit('receive-message', message);
+	});
+});
+
+http.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`);
 });

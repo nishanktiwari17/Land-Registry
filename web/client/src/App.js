@@ -7,6 +7,7 @@ import SuperAdmin from './pages/superAdmin';
 import User from './pages/user';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import Chat from './components/Chat';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 		<Router>
 			<div className="App">
 				<Nav />
+				<Chat />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/admin" element={<Admin />} />
