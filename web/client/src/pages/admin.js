@@ -217,7 +217,7 @@ function Admin() {
 										<TextField
 											fullWidth
 											id="outlined-basic"
-											label="Full Name"
+											label="User address"
 											variant="outlined"
 											onChange={(e) => {
 												setName(e.target.value);
