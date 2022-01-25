@@ -19,6 +19,8 @@ html {
 
 nav {
 	display: flex;
+	margin-top: 0;
+	position: fixed;
 	justify-content: space-between;
 	align-items: center;
 	min-height: 10vh;
@@ -39,8 +41,11 @@ nav {
 
 .li-style {
 	padding-right: 10px;
-	/* color: red; */
-	/* background-color : blue; */
-	/* align-items: center; */
-	/* text-align: center; */
+}
+/* color: red; */
+/* background-color : blue; */
+/* align-items: center; */
+/* text-align: center; */
+.rcw-conversation-container > .rcw-header {
+	background-color: rgb(73, 79, 82);
 }

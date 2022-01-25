@@ -9,12 +9,16 @@ import {
 	CardContent,
 	TextField,
 	MenuItem,
+	Input,
+	FormControl,
 } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import { makeStyles } from '@material-ui/core/styles';
+import FileUpload from 'react-material-file-upload';
 import Web3 from 'web3';
 import contract from 'contract/contract_data.json';
 import validator from 'aadhaar-validator';
+import axios from 'axios';
 
 const abi = contract.contract_abi;
 const address = contract.contract_address;
@@ -53,6 +57,7 @@ function User() {
 	const [currentAccount, setCurrentAccount] = useState(null);
 	const aadhar = validator.isValidNumber(dochash);
 	const [error, setError] = useState(false);
+	const [files, setFiles] = useState([]);
 
 	const checkWalletIsConnected = async () => {
 		const { ethereum } = window;
@@ -286,10 +291,46 @@ function User() {
 		const aadhar = validator.isValidNumber(event.target.value);
 		if (aadhar) {
 			setError(false);
-			setdochash(aadhar);
+			setdochash(event.target.value);
 		} else {
 			setError(true);
 		}
+	};
+
+	// const uploadLandDoc = (e) => {
+	// 	const image = e.target.files[0].name;
+	// 	console.log(image);
+	// 	axios
+	// 		.post('http://localhost:8080/upload', { img: image })
+	// 		.catch((error) => {
+	// 			console.log(error);
+	// 		});
+	// };
+
+	const [image, setImage] = useState({ preview: '', data: '' });
+	const [status, setStatus] = useState('');
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		let formData = new FormData();
+		formData.append('file', image.data);
+		const response = await axios
+			.post('http://localhost:8080/upload', formData)
+			.then((res) => {
+				console.log(res);
+				toast.success(res.data);
+				if (res) setStatus(res.statusText);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	const handleFileChange = (e) => {
+		const img = {
+			preview: URL.createObjectURL(e.target.files[0]),
+			data: e.target.files[0],
+		};
+		setImage(img);
 	};
 
 	useEffect(() => {
@@ -466,6 +507,7 @@ function User() {
 										/>
 									</Grid>
 								</Grid>
+
 								<Button
 									variant="contained"
 									className={classes.button}
@@ -475,6 +517,48 @@ function User() {
 								</Button>
 							</CardContent>
 						</Card>
+						<h2 style={{ textAlign: 'left' }}>
+							Upload Land Document
+						</h2>
+						<Card>
+							<CardContent>
+								<Grid container spacing={2}>
+									<Grid item xs>
+										<TextField
+											fullWidth
+											id="outlined-basic"
+											label="Survey Number"
+											variant="outlined"
+											onChange={(e) => {
+												setSurvey(e.target.value);
+											}}
+										/>
+									</Grid>
+									<Grid>
+										<form
+											style={{ marginTop: '9px' }}
+											onSubmit={handleSubmit}
+										>
+											<TextField
+												type="file"
+												name="file"
+												variant="outlined"
+												onChange={handleFileChange}
+											></TextField>
+											<Button
+												className={classes.button}
+												type="submit"
+												style={{ marginLeft: '6px' }}
+											>
+												Submit
+											</Button>
+										</form>
+										{status && <h4>{status}</h4>}
+									</Grid>
+								</Grid>
+							</CardContent>
+						</Card>
+
 						<h2 style={{ textAlign: 'left' }}>
 							Set Land Availability Status
 						</h2>
