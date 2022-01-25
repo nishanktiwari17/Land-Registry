@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from '@material-ui/core';
+import {Button, Hidden} from '@material-ui/core';
 import {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -9,6 +9,9 @@ const useStyles = makeStyles(() => ({
     marginTop: '15px',
     background: 'rgb(73, 79, 82) !important',
     color: 'white'
+  },
+  newButton: {
+    display: 'hidden'
   },
   saveButton: {
     marginRight: '10px!important',
@@ -27,6 +30,7 @@ const useStyles = makeStyles(() => ({
 function Home() {
     const classes = useStyles();
     const [currentAccount, setCurrentAccount] = useState(null);
+    const [connected, setConnected] = useState(false);
     const checkWalletIsConnected = async () => {
         const { ethereum } = window;
     
@@ -59,6 +63,7 @@ function Home() {
           const accounts = ethereum.request({ method: 'eth_requestAccounts' });
           console.log("Found an account! Address: ", accounts[0]);
           setCurrentAccount(accounts[0]);
+          setConnected(true);
         } catch (err) {
           console.log(err)
         }};
@@ -66,15 +71,12 @@ function Home() {
         useEffect(() => {
             checkWalletIsConnected();
             //handleClick();
-          }, [])
+          }, [connected])
 
     return (
         <div>
               <h1 color='primary'> Welcome to Decentralized Land Registry System </h1> 
-          <Button onClick={handleClick} className={classes.button} variant="contained" >
-            Connect Metamask
-          </Button>  
-
+          { connected ? <Button className={classes.newButton}></Button> : <Button onClick={handleClick} className={classes.button} variant="contained" >Connect Metamask</Button> }
         </div>
     )
 }
